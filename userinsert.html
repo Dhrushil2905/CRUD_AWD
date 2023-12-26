@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="angular.js"></script>
+    <script src="mongoModule.js"></script>
+</head>
+
+<body ng-app="userApp" ng-controller="userCtrl" style="background-color: antiquewhite;">
+
+    <h1 style="color: aquamarine;"  class="text-align"> User Details </h1>
+    <br>
+    <table class="table table-dark"><br>
+        <thead>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>User Role</th>
+            <th>User Age</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in userData">
+                <td>{{item.userID}}</td>
+                <td>{{item.userName}}</td>
+                <td>{{item.userRole}}</td>
+                <td>{{item.age}}</td>
+                <td><button class="btn btn-danger" ng-click="deleteItem(item.userID)">Delete</button>
+                    <button class="btn btn-warning" ng-click="updateItem(item)">Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table><br>
+    <form ng-submit="addUser()">
+        <input type="text" class="form-control" placeholder="Enter User ID" ng-model="newuserData.userID">
+        <input type="text" class="form-control" placeholder="Enter User Name" ng-model="newuserData.userName">
+        <input type="text" class="form-control" placeholder="Enter User Role" ng-model="newuserData.userRole">
+        <input type="text" class="form-control" placeholder="Enter User Age" ng-model="newuserData.age"><br>
+
+        <button type="submit" value="Add User" class="btn btn-primary">Add User</button>
+    </form>
+    <form ng-show="edit" method="post" ng-submit="editItem(updatedItem)">
+        <input type="text" class="form-control" placeholder="Enter User ID" ng-model="updatedItem.userID"
+            ng-disabled="true">
+        <input type="text" class="form-control" placeholder="Enter User Name" ng-model="updatedItem.userName">
+        <input type="text" class="form-control" placeholder="Enter User Role" ng-model="updatedItem.userRole">
+        <input type="text" class="form-control" placeholder="Enter User Age" ng-model="updatedItem.age">
+
+        <button type="submit" value="Update User" class="btn btn-warning">Update User</button>
+    </form>
+    {{userData}} <br>
+</body>
+
+</html>
